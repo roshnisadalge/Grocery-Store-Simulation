@@ -1,0 +1,25 @@
+
+public class CheckOutMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		System.out.println("Hello welcome to the grocery store! Please start adding items to your personal shopping cart.");
+		
+		Cart cart = new Cart(6);
+		
+		cart.addToCart();
+		
+		cart.displayItems();
+		
+		System.out.println("Press 'Done' once you have finished adding items to your cart.");
+	
+		Register register = new Register(10);
+		
+		register.transferToRegister(cart);
+		
+		register.checkOut();
+		
+	}
+
+}
