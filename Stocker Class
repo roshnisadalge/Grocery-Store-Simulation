@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class Stocker extends Employee {
+    private boolean isTall;
+    protected static double salary = 14.50;
+
+    public Stocker(String name, int employeeId) {
+        super(name, employeeId);
+        this.jobType = "Stocker";
+    }
+
+    protected void tallChecker(Scanner scanner) {
+        System.out.println("Are you above 6 feet? (yes/no): ");
+        String heightAnswer = scanner.nextLine();
+        this.isTall = heightAnswer.equalsIgnoreCase("yes");
+        if (this.isTall) {
+        	System.out.println("You will be working aisles 1-9 today. Have a good shift!.");
+        }
+        else {
+        	System.out.println("You will be working aisles 10-18 today. Have a good shift!");
+        }
+    }
+
+   
+}
