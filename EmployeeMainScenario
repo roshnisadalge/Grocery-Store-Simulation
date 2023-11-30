@@ -1,0 +1,66 @@
+import java.util.Scanner;
+
+public class EmployeeMainScenario {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 Employee.employeeMap.put(1001, new Manager("Sophia", 1001));
+	        Employee.employeeMap.put(1002, new Cashier("Jack", 1002));
+	        Employee.employeeMap.put(1003, new Stocker("Roshni", 1003));
+
+	        Scanner scanner = new Scanner(System.in);
+
+	        System.out.println("Welcome to work!");
+	        System.out.println("What is your name?");
+	        String name = scanner.nextLine();
+
+	        System.out.println("Enter your employee number:");
+	        int employeeId = scanner.nextInt();
+	        scanner.nextLine();
+
+	        Employee employee = Employee.employeeMap.get(employeeId);
+
+	        if (employee != null) {
+	            System.out.println("Employee found:");
+	            System.out.println("Name: " + employee.name);
+	            System.out.println("Employee ID: " + employee.employeeId);
+
+	            System.out.println("Thank you, " + name + "! What is your job position? (Manager, Stocker, Cashier)");
+	            String jobType = scanner.nextLine();
+
+	            switch (employee.jobType.toLowerCase()) {
+	                case "manager":
+	                    	((Manager)employee).clockIn();
+	                        ((Manager)employee).setManagerType(scanner);
+	                        
+	                        ((Manager)employee).clockOut(scanner);
+	                       
+	                        break;
+	                case "stocker":
+	                        ((Stocker)employee).clockIn();
+	                        ((Stocker)employee).tallChecker(scanner);
+	                        ((Stocker)employee).clockOut(scanner);
+	                        
+	                    break;
+	                case "cashier":
+	                    	((Cashier)employee).clockIn();
+	                    	((Cashier)employee).setStartingCash(scanner);
+	                    	((Cashier)employee).setEndingCash(scanner); 
+	                    	((Cashier)employee).calculateCashSales();
+	                    	if (((Cashier)employee).hasSufficientCashSales) {
+	                    		((Cashier)employee).clockOut(scanner);
+	                    	}
+	                    	else {
+	                    		break;
+	                    	}
+	                    	break;
+	                default:
+	                    System.out.println("Invalid job position entered. Exiting...");
+	                    break;
+	            }
+	        } else {
+	            System.out.println("You are not an employee. Please step away.");
+	        }
+	}
+
+}
