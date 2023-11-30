@@ -1,0 +1,139 @@
+import java.util.HashSet;
+import java.util.Scanner;
+
+public class Register extends Cart {
+	
+	private HashSet<String> itemsAvailable;
+	private HashSet<String> groceryCart;
+	
+	public Register(int size) {
+		super(size);
+		this.itemsAvailable = new HashSet<>();
+		this.groceryCart = new HashSet<>();
+		preloadedGrocery();
+	}
+	
+	private void preloadedGrocery() {
+		
+		itemsAvailable.add("Banana");
+		itemsAvailable.add("Sugar");
+		itemsAvailable.add("Cookies");
+		itemsAvailable.add("Bread");
+		itemsAvailable.add("Popcorn");
+		itemsAvailable.add("Ice Cream");
+		itemsAvailable.add("Milk");
+		itemsAvailable.add("Carrots");
+		itemsAvailable.add("Broccoli");
+		itemsAvailable.add("Cranberry Juice");
+	}
+	
+	public void transferToRegister(Cart cart) {
+		Scanner scnr = new Scanner(System.in);
+		String pressDone = scnr.next();
+		String[] cartItems = cart.getCartItems();
+		for (String groceryItem : cartItems) {
+			if (groceryItem != null) {
+				groceryCart.add(groceryItem);
+			}
+		}
+		
+	}
+	
+	public void transferToRegister() {
+		System.out.println("You are transferring these items to the register: ");
+		for (String listOfItems : groceryCart) {
+			System.out.println(listOfItems);
+		}
+	}
+	
+	@Override
+	public void displayItems() {
+		System.out.println("Items Checked Out In Register: ");
+		String [] itemsInCart = getCartItems();
+		
+		for(int i = 0; i < itemsInCart.length; ++i) {
+			if(itemsInCart[i] != null) {
+				System.out.println(i + ": " + itemsInCart[i]);
+			}
+		}
+
+	}
+	
+	public void checkOut() {
+		
+		double totalCartPrice = 0;
+
+		System.out.println("Welcome to check out! Please press 'Start' to begin.");
+		Scanner scnr = new Scanner(System.in);
+		String enterStart = scnr.next();
+		System.out.println("How many items would you like to check out?");
+		int amntOfItems = scnr.nextInt();
+		System.out.println("Please check out your items.");
+
+		for (String groceryItem : groceryCart) {
+			if (itemsAvailable.contains(groceryItem)) {
+				double price = getItemPrice(groceryItem);
+				System.out.println("Your '" + groceryItem + "' has been checked out. Price: $" + price);
+				totalCartPrice += price;
+			}
+			else {
+				System.out.println("Item: '" + groceryItem + "' is not available for checkout");
+			}
+			
+		}
+		
+		System.out.println("Are You Finished Checking Out Your Items?");
+		String customerResponse = scnr.next();
+		if (customerResponse.equals("Yes")) {
+			System.out.println("Your Total is: $" + String.format("%.2f", totalCartPrice));
+			System.out.println("Thank You For Shopping With Us!");
+		}
+	}
+	
+
+	public double getItemPrice(String item) {
+		
+		switch(item) {
+		    
+		case "Banana":
+			return 1.50;
+		case "Sugar":
+			return 3.67;
+		case "Cookies":
+			return 2.45;
+		case "Bread":
+		    return 4.99;
+		case "Popcorn":
+			return 3.15;
+		case "Ice Cream":
+			return 2.20;
+		case "Milk":
+			return 2.80;
+		case "Carrots":
+			return 4.25;
+		case "Broccoli":
+			return 1.18;
+		case "Cranberry Juice":
+			return 4.55;
+		default:
+			return 0.0;
+		}
+	}
+	
+	public HashSet<String> getItemsAvailable() {
+		return itemsAvailable;
+	}
+
+	public void setItemsAvailable(HashSet<String> itemsAvailable) {
+		this.itemsAvailable = itemsAvailable;
+	}
+
+	public HashSet<String> getGroceryCart() {
+		return groceryCart;
+	}
+
+	public void setGroceryCart(HashSet<String> groceryCart) {
+		this.groceryCart = groceryCart;
+	}
+	
+}
