@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class Manager extends Employee {
+    private String managerType;
+    protected static double salary = 20.0;
+
+    public Manager(String name, int employeeId) {
+        super(name, employeeId);
+        this.jobType = "Manager";
+    }
+
+    protected void setManagerType(Scanner scanner) {
+        System.out.println("Enter manager type (\"Front\" for front of house or \"Back\" for back of house): ");
+        this.managerType = scanner.nextLine();
+        while(!managerType.equalsIgnoreCase("Front") && !managerType.equalsIgnoreCase("Back")) {
+        	System.out.println("Please enter a valid manager type!");
+        	this.managerType = scanner.nextLine();
+        }
+        if(managerType.equalsIgnoreCase("Front")) {
+        	System.out.println("Turn that frown upside-down and go make a difference. You're on the front lines.");
+        }
+        else {
+        	System.out.println("Hope you brought your pen buddy, the paperwork ain\'t gonna do itself!");
+        }
+        
+    }
+
+    
+}
