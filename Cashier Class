@@ -1,0 +1,43 @@
+import java.util.Scanner;
+
+public class Cashier extends Employee {
+    private double startingCash; 
+    private double endingCash; 
+    protected static double salary = 15.50;
+    protected boolean hasSufficientCashSales;
+
+    public Cashier(String name, int employeeId) {
+        super(name, employeeId);
+        this.jobType = "Cashier";
+    }
+    
+    
+
+    protected void setStartingCash(Scanner scanner) {
+        System.out.println("Enter starting cash amount in your cash box: ");
+        this.startingCash = scanner.nextDouble();
+    }
+
+    protected void setEndingCash(Scanner scanner) {
+        System.out.println("Enter ending cash amount in your cash box: ");
+        this.endingCash = scanner.nextDouble();
+    }
+
+    public void calculateCashSales() {
+        double cashSales = this.endingCash - this.startingCash;
+        System.out.println("You made $" + cashSales + " in cash sales today.");
+        if(cashSales < 50) {
+        	System.out.println("Your cash sales today did not meet the $50.00 minimum.");
+        	System.out.println("That is an extremely poor performance. YOU ARE FIRED!");
+        	System.out.println("Please turn your nametag into the back. We wish you luck in all of your future endeavors.");
+        	employeeMap.remove(employeeId);
+        	this.hasSufficientCashSales = false;
+        }
+        else {
+        	this.hasSufficientCashSales = true;
+        	System.out.println("Good job!");
+        }
+    }
+
+    
+}
